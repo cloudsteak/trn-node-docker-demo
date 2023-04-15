@@ -5,4 +5,4 @@
 - Node 16 LTS
 - Node 18 LTS
 
-Összeköthető Azure WebApp-al
+Összeköthető Azure WebApp-al.
