@@ -17,5 +17,6 @@ steps:
 
 - script: |
     npm install
+    npm install eslint  
     npm run check
   displayName: 'npm install and check code'
