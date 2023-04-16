@@ -3,6 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
+    "check": "eslint ./app.js",
     "start": "node ./bin/www"
   },
   "dependencies": {
@@ -12,5 +13,8 @@
     "express": "~4.16.1",
     "http-errors": "~1.6.3",
     "morgan": "~1.9.1"
+  },
+  "devDependencies": {
+    "eslint": "^8.38.0"
   }
 }
