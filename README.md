@@ -5,6 +5,13 @@
 - Node 16 LTS
 - Node 18 LTS
 
+## Megoldás
+
+A megoldás "Embedded JavaScript templating"-re épül. https://ejs.co
+
+https://ejs.co/#install
+
+
 ## Teszt lépések
 
 **[eslint](https://eslint.org/)** tesztelés előkészítve.
