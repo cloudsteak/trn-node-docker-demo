@@ -18,5 +18,5 @@ steps:
 - script: |
     sudo npm install
     sudo npm install eslint  
-    npm run check
+    sudo npm run check
   displayName: 'npm install and check code'
