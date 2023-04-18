@@ -106,13 +106,13 @@ az acr update -n mentorklubacr --admin-enabled true
 
 3. Pipeline azure-pipelines.yml fájl módosítás
 
-Hogy csak aPullRequest esetén fusson le. Illesszük be a `condition: eq(variables['Build.reason'], 'Push')` sort.
+Hogy csak a Push esetén fusson le. Illesszük be a `condition: eq(variables['Build.reason'], 'IndividualCI')` sort.
 
 ```yaml
 stages:
 - stage: Build
   displayName: Build and push stage
-  condition: eq(variables['Build.reason'], 'Push')
+  condition: eq(variables['Build.reason'], 'IndividualCI')
   jobs:
 
 ```
