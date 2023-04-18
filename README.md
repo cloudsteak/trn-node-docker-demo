@@ -99,3 +99,17 @@ az group create --name mentorklub2023 --location northeurope
 az acr create --resource-group mentorklub2023 --name mentorklubacr --sku Basic
 ```
 
+2. Pipeline építés Azure DevOps-ban
+
+3. Pipeline azure-pipelines.yml fájl módosítás
+
+Hogy csak aPullRequest esetén fusson le. Illesszük be a `condition: eq(variables['Build.reason'], 'PullRequest')` sort.
+
+```yaml
+stages:
+- stage: Build
+  displayName: Build and push stage
+  condition: eq(variables['Build.reason'], 'PullRequest')
+  jobs:
+
+```
