@@ -97,19 +97,31 @@ az group create --name mentorklub2023 --location northeurope
 
 # ACR létrehozás
 az acr create --resource-group mentorklub2023 --name mentorklubacr --sku Basic
+
+# Admin engedlyezése
+az acr update -n mentorklubacr --admin-enabled true
 ```
 
 2. Pipeline építés Azure DevOps-ban
 
 3. Pipeline azure-pipelines.yml fájl módosítás
 
-Hogy csak aPullRequest esetén fusson le. Illesszük be a `condition: eq(variables['Build.reason'], 'PullRequest')` sort.
+Hogy csak aPullRequest esetén fusson le. Illesszük be a `condition: eq(variables['Build.reason'], 'Push')` sort.
 
 ```yaml
 stages:
 - stage: Build
   displayName: Build and push stage
-  condition: eq(variables['Build.reason'], 'PullRequest')
+  condition: eq(variables['Build.reason'], 'Push')
   jobs:
 
+```
+
+A tag-ekhez tegyük be a `latest` értéket is.
+
+```yaml
+        containerRegistry: $(dockerRegistryServiceConnection)
+        tags: |
+          $(tag)
+          latest
 ```
