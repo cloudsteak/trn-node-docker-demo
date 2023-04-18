@@ -110,18 +110,23 @@ Hogy csak a Push esetén fusson le. Illesszük be a `condition: eq(variables['Bu
 
 ```yaml
 stages:
-- stage: Build
-  displayName: Build and push stage
-  condition: eq(variables['Build.reason'], 'IndividualCI')
-  jobs:
-
+  - stage: Build
+    displayName: Build and push stage
+    condition: eq(variables['Build.reason'], 'IndividualCI')
+    jobs:
 ```
 
 A tag-ekhez tegyük be a `latest` értéket is.
 
 ```yaml
-        containerRegistry: $(dockerRegistryServiceConnection)
-        tags: |
-          $(tag)
-          latest
+containerRegistry: $(dockerRegistryServiceConnection)
+tags: |
+  $(tag)
+  latest
 ```
+
+4. Webalkalmazás létrehozása
+
+5. Webalkalmazás módosítása
+
+   Üzembehelyezési központban állítsuk át a `Folyamatos telepítés` értékés `Bekalcsolva`-ra.
