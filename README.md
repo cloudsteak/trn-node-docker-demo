@@ -1,4 +1,5 @@
 # NodeJS alapú webalkalmazás Azure-hoz
+
 ## Támogatott NodeJS verziók
 
 - Node 14 LTS
@@ -11,11 +12,10 @@ A megoldás "Embedded JavaScript templating"-re épül. https://ejs.co
 
 https://ejs.co/#install
 
-
 ## Teszt lépések
 
 **[eslint](https://eslint.org/)** tesztelés előkészítve.
-Ha CI pipeline-t telepítesz, akkor ellemőrzi a kódodban (példa alapján app.js) a pontosvesszők helyességét. A CD rész, csak akkor fut le, ha a CI (a teszt) sikeres. 
+Ha CI pipeline-t telepítesz, akkor ellemőrzi a kódodban (példa alapján app.js) a pontosvesszők helyességét. A CD rész, csak akkor fut le, ha a CI (a teszt) sikeres.
 
 Kézzel is futtatható a teszt:
 
@@ -23,7 +23,7 @@ Kézzel is futtatható a teszt:
 npm run test
 ```
 
-vagy 
+vagy
 
 ```bash
 eslint ./app.js
@@ -33,23 +33,23 @@ eslint ./app.js
 
 1. Personal Acces Token létrehozás: https://github.com/settings/tokens
 2. "Generate new token (classic)"
-    - Note: A token neve. Adj valami értelmezhető nevet. Pl.: AZPIPELINEPAT
-    - Expiration: Token lejárati ideje. Tesztelés esetén választhatod a "No expiration". Éles rendszer esetén adj lejárati időt!!!
-    - Az alábbi részeket válaszd ki a jelölönégyzeteknél
-        - "repo": mindegyiket alatta
-        - "admin:repo_hook": mindegyiket alatta
-        - "user": mindegyiket alatta
+   - Note: A token neve. Adj valami értelmezhető nevet. Pl.: AZPIPELINEPAT
+   - Expiration: Token lejárati ideje. Tesztelés esetén választhatod a "No expiration". Éles rendszer esetén adj lejárati időt!!!
+   - Az alábbi részeket válaszd ki a jelölönégyzeteknél
+     - "repo": mindegyiket alatta
+     - "admin:repo_hook": mindegyiket alatta
+     - "user": mindegyiket alatta
 3. "Generate token" gombra kattintéssal a token létrejön.
 4. A tokent másold biztonságos helyre! Nem visszafejthető.
 5. Menj át az Azure DevOps-ba, a saját organization és project alapján. Pl.: https://cloudsteak.visualstudio.com/MentorKlub/_settings/adminservices (Project Settings > Service connections)
 6. "Create service connection"
 7. "New Azure service connection" résznél válaszd a GitHub-ot
 8. "New GitHub service connection" résznél az alábbi módon töltsd ki
-    - "Personal Access Token Authentication"
-    - "Personal access token" mezőbe illeszd be a GitHub-on generált token értékét
-    - "Service connection name" mezőbe adj egy nevet. Pl.: GITADOCONN
-    - Jelöld be a "Grant access permission to all pipelines" jelölő négyzetet
-    - Kattints a "Verify and Save" gombra
+   - "Personal Access Token Authentication"
+   - "Personal access token" mezőbe illeszd be a GitHub-on generált token értékét
+   - "Service connection name" mezőbe adj egy nevet. Pl.: GITADOCONN
+   - Jelöld be a "Grant access permission to all pipelines" jelölő négyzetet
+   - Kattints a "Verify and Save" gombra
 9. Menj a Pipeline részbe. Pl.: https://cloudsteak.visualstudio.com/MentorKlub/_build
 10. "Create Pipeline"
 11. GitHub (Yaml)
@@ -59,3 +59,43 @@ eslint ./app.js
 15. Létező YAML esetén a Run gomb melletti nyilra kattins és válaszd a "Save" lehetőséget.
 16. Várd meg míg a pipeline létrejön. Ezzel a kapcsolt kész.
 17. Ha GitHub-on módosítasz a kódon, akkor a pipeline elindul és a benne lévő kód lefut.
+
+## NodeJs alkalmazás Docker-izálása
+
+Dockerfile: leírja az alkalmazás környezet kialakításának feltételeit és lépéseit.
+.dockerignore: tartalmazza azon fájlok, mappák és minták lerását, amit a docker image készítő figyelmen kívül hagy.
+
+### Helyi "Build and run"
+
+Helyi gépen hogyan tesztelhetem.
+
+#### 1. Image build
+
+```bash
+docker build --tag cloudsteak/trn-node-demo-docker .
+```
+
+Megjegyzés: Ha az image fájlt Apple Silicon processzoros gépen készítem, de utána Intel processzoros gépen használom, akkor a fenti parancshoz adjuk hozzá ezt: `--platform linux/amd64`
+
+#### 2. Docker konténer létrehozás és futtatás
+
+```bash
+docker run -d -p 80:3000 --name nodedemo cloudsteak/trn-node-demo-docker:latest
+```
+
+#### 3. Eredmény tesztelése
+
+http://localhost
+
+### Azure-ban futtatás
+
+1. Azure Container Registry létrehozás
+
+```bash
+# Erőforráscsoport létrehozás - ha szükséges
+az group create --name mentorklub2023 --location northeurope
+
+# ACR létrehozás
+az acr create --resource-group mentorklub2023 --name mentorklubacr --sku Basic
+```
+
