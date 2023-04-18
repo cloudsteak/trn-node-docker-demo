@@ -22,7 +22,7 @@ variables:
 stages:
 - stage: Build
   displayName: Build and push stage
-  condition: eq(variables['Build.reason'], 'Push')
+  condition: eq(variables['Build.reason'], 'IndividualCI')
   jobs:
   - job: Build
     displayName: Build
