@@ -6,6 +6,11 @@
 - Node 16 LTS
 - Node 18 LTS
 
+## Kapcsolódó projekt
+
+Nem Docker verzió: https://github.com/cloudsteak/trn-node-demo
+
+
 ## Megoldás
 
 A megoldás "Embedded JavaScript templating"-re épül. https://ejs.co
