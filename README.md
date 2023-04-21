@@ -11,6 +11,10 @@
 Nem Docker verzió: https://github.com/cloudsteak/trn-node-demo
 
 
+## Docker alapok
+
+[docker-alapok.md](./docs/docker-alapok.md)
+
 ## Megoldás
 
 A megoldás "Embedded JavaScript templating"-re épül. https://ejs.co
