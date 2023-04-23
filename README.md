@@ -84,7 +84,7 @@ Helyi gépen hogyan tesztelhetem.
 docker build --tag cloudsteak/trn-node-demo-docker .
 ```
 
-Megjegyzés: Ha az image fájlt Apple Silicon processzoros gépen készítem, de utána Intel processzoros gépen használom, akkor a fenti parancshoz adjuk hozzá ezt: `--platform linux/arm64`
+Megjegyzés: Ha az image fájlt Apple Silicon processzoros gépen készítem, de utána Intel processzoros gépen használom, akkor a fenti parancshoz adjuk hozzá ezt: `--platform linux/amd64`
 
 #### 2. Docker konténer létrehozás és futtatás
 
