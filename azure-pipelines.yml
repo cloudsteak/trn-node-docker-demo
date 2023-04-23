@@ -1,0 +1,41 @@
+# Docker
+# Build and push an image to Azure Container Registry
+# https://docs.microsoft.com/azure/devops/pipelines/languages/docker
+
+trigger:
+- main
+
+resources:
+- repo: self
+
+variables:
+  # Container registry service connection established during pipeline creation
+  dockerRegistryServiceConnection: '2f2b98e0-4312-47bb-8c5e-73fda02f4fe1'
+  imageRepository: 'cloudsteaktrnnodedockerdemo'
+  containerRegistry: 'mentorklubacr.azurecr.io'
+  dockerfilePath: '$(Build.SourcesDirectory)/Dockerfile'
+  tag: '$(Build.BuildId)'
+
+  # Agent VM image name
+  vmImageName: 'ubuntu-latest'
+
+stages:
+- stage: Build
+  displayName: Kép - Épít és Feltölt
+  condition: eq(variables['Build.reason'], 'IndividualCI')
+  jobs:
+  - job: Build
+    displayName: Épít
+    pool:
+      vmImage: $(vmImageName)
+    steps:
+    - task: Docker@2
+      displayName: Kép építése és feltöltése ACR-be
+      inputs:
+        command: buildAndPush
+        repository: $(imageRepository)
+        dockerfile: $(dockerfilePath)
+        containerRegistry: $(dockerRegistryServiceConnection)
+        tags: |
+          $(tag)
+          latest
