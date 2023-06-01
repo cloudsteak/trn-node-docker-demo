@@ -1,0 +1,44 @@
+# trn-node-demo.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: trn-node-demo
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: trn-node-demo-deployment
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: trn-node-demo-deployment
+    spec:
+      containers:
+        - image: azurehaladoacr.azurecr.io/trn-node-demo-docker:latest
+          name: trn-node-demo
+          ports:
+            - containerPort: 3000
+              name: trn-node-demo
+          resources:
+            requests:
+              cpu: "0.3"
+              memory: "64Mi"
+            limits:
+              cpu: "2"
+              memory: "2Gi"
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: trn-node-demo-loadbalancer
+spec:
+  type: LoadBalancer
+  ports:
+    - name: "http"
+      port: 80
+      targetPort: 3000
+  selector:
+    app: trn-node-demo-deployment

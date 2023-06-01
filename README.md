@@ -84,8 +84,9 @@ Helyi gépen hogyan tesztelhetem.
 docker build --tag cloudsteak/trn-node-demo-docker .
 ```
 
-Megjegyzés: Ha az image fájlt Apple Silicon processzoros gépen készítem, de utána Intel processzoros gépen használom, akkor a fenti parancshoz adjuk hozzá ezt: `--platform linux/amd64`
-
+Megjegyzés: 
+- Ha az image fájlt Apple Silicon processzoros gépen készítem, de utána Intel processzoros gépen használom, akkor a fenti parancshoz adjuk hozzá ezt: `--platform linux/amd64`
+- Több platformos build: `docker buildx build --tag cloudsteak/trn-node-demo-docker --push . --platform linux/amd64,linux/arm64,linux/arm/v7`
 #### 2. Docker konténer létrehozás és futtatás
 
 ```bash
@@ -139,3 +140,9 @@ tags: |
 5. Webalkalmazás módosítása
 
    Üzembehelyezési központban állítsuk át a `Folyamatos telepítés` értékés `Bekalcsolva`-ra.
+
+
+
+## AKS
+
+AKS-en való futtatáshoz itt találsz leírást: [aks/readme.md](aks/readme.md)
