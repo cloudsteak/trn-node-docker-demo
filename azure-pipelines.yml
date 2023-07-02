@@ -39,3 +39,27 @@ stages:
               tags: |
                 $(tag)
                 latest
+  - stage: ci_code_check
+    displayName: CI - Kód ellenőrzés
+    condition: eq(variables['Build.Reason'], 'PullRequest')
+    jobs:
+      - job: basic_check
+        displayName: Alap ellenőrzés
+        steps:
+          - task: NodeTool@0
+            inputs:
+              versionSpec: "18.x"
+            displayName: "Install Node.js"
+          - script: |
+              sudo npm install
+              sudo npm install eslint  
+              
+              echo "##[command]A kód rendben?"
+              sudo npm run test
+              commandresult=$(echo $?)    
+              echo "##[debug]Kód ellenőrzés eredménye: $commandresult"
+              if [[ $commandresult != 0 ]];
+              then
+                echo "##vso[task.complete result=Failed;]A kódban hiba található!"
+              fi
+            displayName: "Kód ellenőrzés"
