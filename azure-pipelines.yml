@@ -3,37 +3,39 @@
 # https://docs.microsoft.com/azure/devops/pipelines/languages/docker
 
 trigger:
-- main
+  - main
 
 resources:
-- repo: self
+  - repo: self
 
 variables:
   # Container registry service connection established during pipeline creation
-  dockerRegistryServiceConnection: '998e23d4-f55d-46a5-9308-36340d0dbd4c'
-  imageRepository: 'trnnodedockerdemo'
-  containerRegistry: 'mentorklubacr.azurecr.io'
-  dockerfilePath: '$(Build.SourcesDirectory)/Dockerfile'
-  tag: '$(Build.BuildId)'
+  dockerRegistryServiceConnection: "998e23d4-f55d-46a5-9308-36340d0dbd4c"
+  imageRepository: "trnnodedockerdemo"
+  containerRegistry: "mentorklubacr.azurecr.io"
+  dockerfilePath: "$(Build.SourcesDirectory)/Dockerfile"
+  tag: "$(Build.BuildId)"
 
   # Agent VM image name
-  vmImageName: 'ubuntu-latest'
+  vmImageName: "ubuntu-latest"
 
 stages:
-- stage: Build
-  displayName: Build and push stage
-  jobs:
-  - job: Build
-    displayName: Build
-    pool:
-      vmImage: $(vmImageName)
-    steps:
-    - task: Docker@2
-      displayName: Build and push an image to container registry
-      inputs:
-        command: buildAndPush
-        repository: $(imageRepository)
-        dockerfile: $(dockerfilePath)
-        containerRegistry: $(dockerRegistryServiceConnection)
-        tags: |
-          $(tag)
+  - stage: Build
+    displayName: Build and push stage
+    condition: eq(variables['Build.reason'], 'IndividualCI')
+    jobs:
+      - job: Build
+        displayName: Build
+        pool:
+          vmImage: $(vmImageName)
+        steps:
+          - task: Docker@2
+            displayName: Build and push an image to container registry
+            inputs:
+              command: buildAndPush
+              repository: $(imageRepository)
+              dockerfile: $(dockerfilePath)
+              containerRegistry: $(dockerRegistryServiceConnection)
+              tags: |
+                $(tag)
+                latest
