@@ -12,7 +12,7 @@ docker build --tag cloudsteak/trn-node-demo-docker . --platform linux/amd64
 #### ACR Resource Group
 
 ```bash
-az group create --name mentorklub2023 --location northeurope
+az group create --name eszak-europa-acr --location northeurope
 ```
 
 #### AKS Resource Group
@@ -26,7 +26,7 @@ az group create --name eszak-europa-k8s --location northeurope
 #### ACR létrehozás
 
 ```bash
-az acr create --resource-group mentorklub2023 --name mentorklubacr --sku Basic
+az acr create --resource-group eszak-europa-acr --name azurehaladoacr --sku Basic
   ```
 
 
@@ -35,28 +35,28 @@ az acr create --resource-group mentorklub2023 --name mentorklubacr --sku Basic
 Már be kell jelentkezve lenned a megfelelő Azure előfizetésbe!
 
 ```
-az acr login --name mentorklubacr
+az acr login --name azurehaladoacr
 ```
 
 
 #### TAG docker images: ACR
 
 ```
-docker tag cloudsteak/trn-node-demo-docker:latest mentorklubacr.azurecr.io/trn-node-demo-docker:latest
-docker tag cloudsteak/trn-node-demo-docker:latest mentorklubacr.azurecr.io/trn-node-demo-docker:1.0
+docker tag cloudsteak/trn-node-demo-docker:latest azurehaladoacr.azurecr.io/trn-node-demo-docker:latest
+docker tag cloudsteak/trn-node-demo-docker:latest azurehaladoacr.azurecr.io/trn-node-demo-docker:1.0
 ```
 
 #### Kép feltöltése ACR-be
 
 ```
-docker push mentorklubacr.azurecr.io/trn-node-demo-docker:latest
-docker push mentorklubacr.azurecr.io/trn-node-demo-docker:1.0
+docker push azurehaladoacr.azurecr.io/trn-node-demo-docker:latest
+docker push azurehaladoacr.azurecr.io/trn-node-demo-docker:1.0
 ```
 
 ## AKS Cluster létrehozás
 
 ```
-az aks create --resource-group eszak-europa-k8s --name azurehaladoaks --node-count 2 --generate-ssh-keys --attach-acr mentorklubacr --node-vm-size Standard_B2ms
+az aks create --resource-group eszak-europa-k8s --name azurehaladoaks --node-count 2 --generate-ssh-keys --attach-acr azurehaladoacr --node-vm-size Standard_B2ms
 ```
 
 ## AKS cluster credential letöltése
@@ -123,17 +123,3 @@ kubectl autoscale deployment trn-node-demo --cpu-percent=60 --min=2 --max=10 -n 
 ```
 kubectl get hpa -n trn-node-demo
 ```
-
-# Erőforrás ellenőrzés
-
-## Aktuális CPU és Memory használat mindegyik névtérben
-
-```kubectl top pods --all-namespaces```
-
-## Aktuális CPU és Memory használat mindegyik névtérben - CPU használat szerint csökkenő sorrendben
-
-```kubectl top pods --all-namespaces | sort --key 2 -b | awk 'NR<2{print $0;next}{print $0| "sort --key 3 --numeric -b --reverse"}'```
-
-## Aktuális CPU és Memory használat mindegyik névtérben - Memória használat szerint csökkenő sorrendben
-
-```kubectl top pods --all-namespaces | sort --key 2 -b | awk 'NR<2{print $0;next}{print $0| "sort --key 4 --numeric -b --reverse"}'```
