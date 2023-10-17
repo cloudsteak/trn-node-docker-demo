@@ -1,6 +1,6 @@
 # This is a basic workflow to help you get started with Actions
 
-name: CI
+name: CI (continuous integration)
 
 # Controls when the workflow will run
 on:
@@ -18,8 +18,8 @@ on:
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
   build:
-    if: github.event_name != 'pull_request'
     runs-on: ubuntu-latest
+    name: Kód és funkció ellenőrzés
     steps:
       - uses: actions/checkout@v4
       - name: Use Node.js
