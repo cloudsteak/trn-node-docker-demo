@@ -39,27 +39,66 @@ stages:
               tags: |
                 $(tag)
                 latest
-  - stage: ci_code_check
-    displayName: CI - Kód ellenőrzés
+  - stage: ci_code_lint
+    displayName: CI - Kód formátum ellenőrzés
     condition: eq(variables['Build.Reason'], 'PullRequest')
     jobs:
       - job: basic_check
-        displayName: Alap ellenőrzés
+        displayName: Kód ellenőrzés
         steps:
           - task: NodeTool@0
+            displayName: "NodeJs 18 telepítés"
             inputs:
               versionSpec: "18.x"
-            displayName: "Install Node.js"
-          - script: |
-              sudo npm install
-              sudo npm install eslint  
-
-              echo "##[command]A kód rendben?"
-              sudo npm run test
-              commandresult=$(echo $?)    
-              echo "##[debug]Kód ellenőrzés eredménye: $commandresult"
-              if [[ $commandresult != 0 ]];
-              then
-                echo "##vso[task.complete result=Failed;]A kódban hiba található!"
-              fi
-            displayName: "Kód ellenőrzés"
+          - task: Bash@3
+            name: install_dependencies
+            displayName: Függőségek teleptése
+            inputs:
+              targetType: "inline"
+              script: |
+                npm upgrade
+                npm install
+          - task: Bash@3
+            name: node_check
+            displayName: "NodeJS - Kód ellenőrzés"
+            inputs:
+              targetType: "inline"
+              script: |
+                echo "##[command]A kód rendben?"
+                npm run lint:js
+          - task: Bash@3
+            name: ejs_check
+            displayName: "EJS - Kód ellenőrzés"
+            inputs:
+              targetType: "inline"
+              script: |
+                echo "##[command]A kód rendben?"
+                npm run lint:ejs
+  - stage: ci_code_check
+    displayName: CI - Funkció ellenőrzés
+    condition: eq(variables['Build.Reason'], 'PullRequest')
+    dependsOn: ci_code_lint
+    jobs:
+      - job: basic_check
+        displayName: Funkció ellenőrzés
+        steps:
+          - task: NodeTool@0
+            displayName: "NodeJs 18 telepítés"
+            inputs:
+              versionSpec: "18.x"
+          - task: Bash@3
+            name: install_dependencies
+            displayName: Függőségek teleptése
+            inputs:
+              targetType: "inline"
+              script: |
+                npm upgrade
+                npm install
+          - task: Bash@3
+            name: unit_tests
+            displayName: "Funkcionális tesztek futtatása"
+            inputs:
+              targetType: "inline"
+              script: |
+                echo "##[command]Funkciók rendben?"
+                npx mocha test

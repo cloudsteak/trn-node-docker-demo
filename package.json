@@ -1,20 +1,29 @@
 {
   "name": "node-demo",
-  "version": "0.0.0",
+  "version": "2.0.0",
   "private": true,
   "scripts": {
-    "test": "eslint ./app.js",
+    "lint:js": "npx eslint .",
+    "lint:ejs": "npx ejslint **/*.ejs",
+    "test": "npx mocha test",
     "start": "node ./bin/www"
   },
   "dependencies": {
     "cookie-parser": "~1.4.4",
-    "debug": "~2.6.9",
-    "ejs": "~2.6.1",
-    "express": "~4.16.1",
-    "http-errors": "~1.6.3",
-    "morgan": "~1.9.1"
+    "debug": "~4.3.4",
+    "ejs": "~3.1.9",
+    "express": "~4.18.2",
+    "http-errors": "~2.0.0",
+    "morgan": "~1.10.0"
   },
   "devDependencies": {
-    "eslint": "^8.38.0"
+    "chai": "^4.3.10",
+    "ejs-lint": "^2.0.0",
+    "eslint": "^8.51.0",
+    "eslint-plugin-ejs": "^0.0.2",
+    "eslint-plugin-ejs-js": "^0.1.0",
+    "eslint-plugin-node": "^11.1.0",
+    "mocha": "^10.2.0",
+    "supertest": "^6.3.3"
   }
 }
