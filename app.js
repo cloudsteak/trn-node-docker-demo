@@ -19,9 +19,6 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-
-let a;
-
 /* Kezdőlap */
 app.get('/', function (req, res) {
   const NodeVersion = process.versions;

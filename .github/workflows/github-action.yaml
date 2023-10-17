@@ -20,6 +20,7 @@ jobs:
   build:
     runs-on: ubuntu-latest
     name: Kód és funkció ellenőrzés
+    if: github.event_name == 'pull_request'
     steps:
       - uses: actions/checkout@v4
       - name: Use Node.js
