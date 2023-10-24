@@ -113,7 +113,7 @@ az acr update -n mentorklubacr --admin-enabled true
 ```
 
 2. Pipeline építés Azure DevOps-ban
-
+  
 3. Pipeline azure-pipelines.yml fájl módosítás
 
 Hogy csak a Push esetén fusson le. Illesszük be a `condition: eq(variables['Build.reason'], 'IndividualCI')` sort.
