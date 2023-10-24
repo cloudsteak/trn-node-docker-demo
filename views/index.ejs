@@ -2,15 +2,19 @@
 <html>
   <head>
     <title><%= data.title %></title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <link rel="stylesheet" href="/stylesheets/style.css" />
   </head>
   <body>
     <div id="bodyDiv">
-    <h1>Üdvözöllek az Azure világában!</h1>
+      <h1>Üdvözöllek az Azure világában</h1>
 
-    <h2><%= data.title %></h2>
-    <p>NodeJS Verzió: <%= data.nodeVerison %></p>
-    <p>Host: <%= data.host %></p>
+      <h2><%= data.title %></h2>
+      <div>
+        <h3>Docker alapon</h3>
+        <img src="/images/docker.png" style="width: 200px" />
+      </div>
+      <p>NodeJS Verzió: <%= data.nodeVerison %></p>
+      <p>Host: <%= data.host ></p>
     </div>
   </body>
 </html>

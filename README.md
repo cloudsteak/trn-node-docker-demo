@@ -135,7 +135,7 @@ tags: |
   latest
 ```
 
-4. Webalkalmazás létrehozása
+4. Webalkalmazás létrehozása (Docker)
 
 5. Webalkalmazás módosítása
 
