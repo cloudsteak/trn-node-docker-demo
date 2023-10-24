@@ -21,7 +21,7 @@ variables:
 
 stages:
   - stage: Build
-    displayName: CD - Build and push stage
+    displayName: CD - Épít és feltölt
     condition: eq(variables['Build.reason'], 'IndividualCI')
     jobs:
       - job: Build
