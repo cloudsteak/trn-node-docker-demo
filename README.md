@@ -139,7 +139,8 @@ tags: |
 
 5. Webalkalmazás módosítása
 
-   Üzembehelyezési központban állítsuk át a `Folyamatos telepítés` értékés `Bekalcsolva`-ra.
+   1. Üzembehelyezési központban állítsuk át a `Folyamatos telepítés` értékés `Bekalcsolva`-ra.
+   2. Konfiguráció > Általános beállítások > Mindig bekapcsolva: Be
 
 
 
