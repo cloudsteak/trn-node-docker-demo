@@ -4,15 +4,16 @@
 
 trigger:
   - main
+  - demo
 
 resources:
   - repo: self
 
 variables:
   # Container registry service connection established during pipeline creation
-  dockerRegistryServiceConnection: "9430b87a-347b-41b1-9fdc-abeeb41828ee"
+  dockerRegistryServiceConnection: "5b8b96f9-5e5f-4ce3-aac7-86eadd45e6da"
   imageRepository: "trn-node-docker"
-  containerRegistry: "mentorklubacr.azurecr.io"
+  containerRegistry: "mentorklub.azurecr.io"
   dockerfilePath: "$(Build.SourcesDirectory)/Dockerfile"
   tag: "$(Build.BuildId)"
 
@@ -47,9 +48,9 @@ stages:
         displayName: Kód ellenőrzés
         steps:
           - task: NodeTool@0
-            displayName: "NodeJs 18 telepítés"
+            displayName: "NodeJs 20 telepítés"
             inputs:
-              versionSpec: "18.x"
+              versionSpec: "20.x"
           - task: Bash@3
             name: install_dependencies
             displayName: Függőségek teleptése
@@ -83,9 +84,9 @@ stages:
         displayName: Funkció ellenőrzés
         steps:
           - task: NodeTool@0
-            displayName: "NodeJs 18 telepítés"
+            displayName: "NodeJs 20 telepítés"
             inputs:
-              versionSpec: "18.x"
+              versionSpec: "20.x"
           - task: Bash@3
             name: install_dependencies
             displayName: Függőségek teleptése
@@ -101,4 +102,4 @@ stages:
               targetType: "inline"
               script: |
                 echo "##[command]Funkciók rendben?"
-                npx mocha test
+                npm run test

@@ -8,7 +8,7 @@
 
 ## Kapcsolódó projekt
 
-Nem Docker verzió: https://github.com/cloudsteak/trn-node-demo
+Nem Docker verzió: https://github.com/mentorklub.azurecr.io/trn-node-demo
 
 
 ## Docker alapok
@@ -81,16 +81,16 @@ Helyi gépen hogyan tesztelhetem.
 #### 1. Image build
 
 ```bash
-docker build --tag cloudsteak/trn-node-demo-docker .
+docker build --tag mentorklub.azurecr.io/trn-node-docker .
 ```
 
 Megjegyzés: 
 - Ha az image fájlt Apple Silicon processzoros gépen készítem, de utána Intel processzoros gépen használom, akkor a fenti parancshoz adjuk hozzá ezt: `--platform linux/amd64`
-- Több platformos build: `docker buildx build --tag cloudsteak/trn-node-demo-docker --push . --platform linux/amd64,linux/arm64,linux/arm/v7`
+- Több platformos build: `docker buildx build --tag mentorklub.azurecr.io/trn-node-docker --push . --platform linux/amd64,linux/arm64,linux/arm/v7`
 #### 2. Docker konténer létrehozás és futtatás
 
 ```bash
-docker run -d -p 80:3000 --name nodedemo cloudsteak/trn-node-demo-docker:latest
+docker run -d -p 80:3000 --name nodedemo mentorklub.azurecr.io/trn-node-docker:latest
 ```
 
 #### 3. Eredmény tesztelése
