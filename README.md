@@ -2,9 +2,9 @@
 
 ## Támogatott NodeJS verziók
 
-- Node 14 LTS
 - Node 16 LTS
 - Node 18 LTS
+- Node 20 LTS
 
 ## Kapcsolódó projekt
 
@@ -106,10 +106,10 @@ http://localhost
 az group create --name mentorklub2023 --location northeurope
 
 # ACR létrehozás
-az acr create --resource-group mentorklub2023 --name mentorklubacr --sku Basic
+az acr create --resource-group mentorklub2023 --name mentorklub --sku Basic
 
 # Admin engedlyezése
-az acr update -n mentorklubacr --admin-enabled true
+az acr update -n mentorklub --admin-enabled true
 ```
 
 2. Pipeline építés Azure DevOps-ban
@@ -147,3 +147,29 @@ tags: |
 ## AKS
 
 AKS-en való futtatáshoz itt találsz leírást: [aks/readme.md](aks/readme.md)
+
+
+## Hibakezelés
+
+1. Admin Account engedélyezése az ACR-ben
+
+Ha frissen hoztunk létre egy Azure Container Registry-t, akkor az alapértelmezett beállítások miatt nem tudunk hozzáférni az ACR-hez. 
+
+Amikor megpróbálunk mégis hozzáférni webalkalmazásból, akkor a következő hibát kapjuk:
+
+![ACR hiba](docs/images/acr-admin-error.png)
+
+Hiba megoldása, hogy engedélyezzük az Admin Account-ot az ACR-ben.
+
+1. Jelentkezzünk be az ACR-be:
+
+```bash
+az acr login --name mentorklub
+
+```
+
+2. Engedélyezzük az Admin Account-ot:
+
+```bash
+az acr update -n mentorklub --admin-enabled true
+```
