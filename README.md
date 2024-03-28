@@ -8,7 +8,7 @@
 
 ## Kapcsolódó projekt
 
-Nem Docker verzió: https://github.com/mentorklub.azurecr.io/trn-node-demo
+Nem Docker verzió: https://github.com/cloudsteak/trn-node-demo
 
 
 ## Docker alapok
