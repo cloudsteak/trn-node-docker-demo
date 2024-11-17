@@ -75,6 +75,14 @@ stages:
               script: |
                 echo "##[command]A kód rendben?"
                 npm run lint:ejs
+          - task: Bash@3
+            name: html_check
+            displayName: "HTML - Kód ellenőrzés"
+            inputs:
+              targetType: "inline"
+              script: |
+                echo "##[command]A kód rendben?"
+                npm run lint:html
   - stage: ci_code_check
     displayName: CI - Funkció ellenőrzés
     condition: eq(variables['Build.Reason'], 'PullRequest')
