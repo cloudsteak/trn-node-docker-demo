@@ -26,12 +26,12 @@ stages:
     condition: eq(variables['Build.reason'], 'IndividualCI')
     jobs:
       - job: Build
-        displayName: Build
+        displayName: Építés (Build)
         pool:
           vmImage: $(vmImageName)
         steps:
           - task: Docker@2
-            displayName: Build and push an image to container registry
+            displayName: Kép építése és feltöltése a Azure ACR-be
             inputs:
               command: buildAndPush
               repository: $(imageRepository)
