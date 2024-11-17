@@ -12,13 +12,13 @@ docker build --tag cloudsteak/trn-node-demo-docker . --platform linux/amd64
 #### ACR Resource Group
 
 ```bash
-az group create --name mentorklub2023 --location northeurope
+az group create --name mentorklub --location swedencentral
 ```
 
 #### AKS Resource Group
 
 ```bash
-az group create --name eszak-europa-k8s --location northeurope
+az group create --name eszak-europa-k8s --location swedencentral
 ```
 
 ### ACR kezelés
@@ -26,7 +26,7 @@ az group create --name eszak-europa-k8s --location northeurope
 #### ACR létrehozás
 
 ```bash
-az acr create --resource-group mentorklub2023 --name mentorklubacr --sku Basic
+az acr create --resource-group mentorklub --name mentorklubacr --sku Basic
   ```
 
 
