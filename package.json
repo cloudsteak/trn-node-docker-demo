@@ -1,6 +1,7 @@
 {
   "name": "node-demo",
   "version": "2.1.0",
+  "type": "module",
   "private": true,
   "scripts": {
     "lint:js": "npx eslint .",
