@@ -101,12 +101,14 @@ http://localhost
 
 1. Azure Container Registry létrehozás
 
+_Megjegyzés: Az ACR-nek Azure szinten egyedinek kell lennie. A lenti példában használt `mentorklub` ARC már létezik, így használj másikat, ha ezt is szeretnld kipróbálni._
+
 ```bash
 # Erőforráscsoport létrehozás - ha szükséges
-az group create --name mentorklub2023 --location northeurope
+az group create --name mentorklub --location swedencentral
 
 # ACR létrehozás
-az acr create --resource-group mentorklub2023 --name mentorklub --sku Basic
+az acr create --resource-group mentorklub --name mentorklub --sku Basic
 
 # Admin engedlyezése
 az acr update -n mentorklub --admin-enabled true
