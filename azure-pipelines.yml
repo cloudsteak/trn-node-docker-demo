@@ -11,9 +11,9 @@ resources:
 
 variables:
   # Container registry service connection established during pipeline creation
-  dockerRegistryServiceConnection: "f4f94a44-0505-4235-9347-4926b8fef7a4"
+  dockerRegistryServiceConnection: "30fcbe04-1556-4425-a7b8-8ed5516617f6"
   imageRepository: "trn-node-docker"
-  containerRegistry: "mentorklub.azurecr.io"
+  containerRegistry: "gombireg.azurecr.io"
   dockerfilePath: "$(Build.SourcesDirectory)/Dockerfile"
   tag: "$(Build.BuildId)"
 
