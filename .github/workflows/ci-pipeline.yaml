@@ -6,13 +6,10 @@ name: CI (continuous integration)
 on:
   # Összefűzési kérés indítása az alábbi branch-ekre
   pull_request_target:
-    types: [opened, synchronize, reopened, ready_for_review, labeled, edited]
+    types: [opened, synchronize, reopened, ready_for_review, labeled, unlabeled, edited]
     branches:
       - main
       - demo
-
-  # Kézzel indítás engedélyezése
-  workflow_dispatch:
 
 # Feladatok
 jobs:
@@ -22,6 +19,9 @@ jobs:
     steps:
       - name: Kód letöltés
         uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.ref }}
+          repository: ${{ github.event.pull_request.head.repo.full_name }}
       - name: Node.js beállítás
         uses: actions/setup-node@v3
         with:
