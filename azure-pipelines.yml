@@ -21,7 +21,7 @@ variables:
   vmImageName: "ubuntu-latest"
 
 stages:
-  - stage: cd_build_and_push
+  - stage: Build
     displayName: CD - Épít és feltölt
     condition: eq(variables['Build.reason'], 'IndividualCI')
     jobs:
