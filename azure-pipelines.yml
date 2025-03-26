@@ -11,9 +11,9 @@ resources:
 
 variables:
   # Container registry service connection established during pipeline creation
-  dockerRegistryServiceConnection: "f96295a4-0752-4228-ad35-419f404433a0" # FONTOS: Ezt módosítsd az Azure DevOps "service conection" azinisítójának megfelelően
-  imageRepository: "trn-node-docker-app" # FONTOS: Ezt módosítsd a kép nevének megfelelően
-  containerRegistry: "mentorklub.azurecr.io" # FONTOS: Ezt módosítsd az ACR nevének megfelelően
+  dockerRegistryServiceConnection: "820c3ae5-6223-48fa-95ea-3f938628b7c6" # FONTOS: Ezt módosítsd az Azure DevOps "service conection" azinisítójának megfelelően
+  imageRepository: "node-docker-app" # FONTOS: Ezt módosítsd a kép nevének megfelelően
+  containerRegistry: "plankcsabanodedemo.azurecr.io" # FONTOS: Ezt módosítsd az ACR nevének megfelelően
   dockerfilePath: "$(Build.SourcesDirectory)/Dockerfile"
   tag: "$(Build.BuildId)"
 
