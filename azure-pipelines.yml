@@ -11,7 +11,7 @@ resources:
 
 variables:
   # Container registry service connection established during pipeline creation
-  dockerRegistryServiceConnection: "820c3ae5-6223-48fa-95ea-3f938628b7c6" # FONTOS: Ezt módosítsd az Azure DevOps "service conection" azinisítójának megfelelően
+  dockerRegistryServiceConnection: "ce2a448b-602a-4d9c-a542-00663b887540" # FONTOS: Ezt módosítsd az Azure DevOps "service conection" azinisítójának megfelelően
   imageRepository: "node-docker-app" # FONTOS: Ezt módosítsd a kép nevének megfelelően
   containerRegistry: "plankcsabanodedemo.azurecr.io" # FONTOS: Ezt módosítsd az ACR nevének megfelelően
   dockerfilePath: "$(Build.SourcesDirectory)/Dockerfile"
@@ -21,7 +21,7 @@ variables:
   vmImageName: "ubuntu-latest"
 
 stages:
-  - stage: Build
+  - stage: cd_build_and_push
     displayName: CD - Épít és feltölt
     condition: eq(variables['Build.reason'], 'IndividualCI')
     jobs:
