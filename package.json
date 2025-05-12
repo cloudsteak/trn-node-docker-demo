@@ -28,6 +28,6 @@
     "eslint-plugin-node": "^11.1.0",
     "htmlhint": "^1.1.4",
     "mocha": "^11.1.0",
-    "supertest": "^7.0.0"
+    "supertest": "^7.1.1"
   }
 }
