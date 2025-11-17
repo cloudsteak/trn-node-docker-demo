@@ -13,15 +13,17 @@ jobs:
       -
         name: Checkout
         uses: actions/checkout@v5
-      -
-        name: Login to Docker Hub
+      - uses: benjlevesque/short-sha@v3.0
+        id: short-sha
+        with:
+          length: 6
+      - name: Login to Docker Hub
         uses: docker/login-action@v3
         with:
           username: ${{ vars.ACR_USERNAME }}
           password: ${{ secrets.ACR_PASSWORD }}
           registry: ${{ vars.ACR_LOGIN_URL }}
-      -
-        name: Set up QEMU
+      - name: Set up QEMU
         uses: docker/setup-qemu-action@v3
       -
         name: Set up Docker Buildx
@@ -32,4 +34,6 @@ jobs:
         with:
           context: .
           push: true
-          tags: ${{ vars.ACR_LOGIN_URL }}/tanulo-42343:latest
+          tags: |
+            ${{ vars.ACR_LOGIN_URL }}/tanulo-42343:latest
+            ${{ vars.ACR_LOGIN_URL }}/tanulo-42343:${{ steps.short-sha.outputs.sha }}

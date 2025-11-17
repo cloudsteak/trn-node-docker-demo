@@ -131,3 +131,5 @@ dist
 .DS_Store
 commands.md
 .vscode/settings.json
+
+.kerno/**
