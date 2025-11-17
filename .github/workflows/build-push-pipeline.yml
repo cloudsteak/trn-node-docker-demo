@@ -1,5 +1,5 @@
 ################################################
-# Docker Kép építése és feltöltése
+#   Docker Kép építése és feltöltése ACR-be
 ################################################
 # Szükséges változók:
 # ACR_LOGIN_URL - Az Azure Container Registry bejelentkezési URL-je (pl. myregistry.azurecr.io)
@@ -16,6 +16,7 @@ on:
 
 jobs:
   docker:
+    name: Build and Push Docker Image to ACR
     runs-on: ubuntu-latest
     steps:
       -
@@ -24,7 +25,7 @@ jobs:
       - uses: benjlevesque/short-sha@v3.0
         id: short-sha
         with:
-          length: 6
+          length: 8
       - name: Login to Docker Hub
         uses: docker/login-action@v3
         with:
