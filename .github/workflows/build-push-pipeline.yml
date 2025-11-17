@@ -1,5 +1,13 @@
-name: Docker Kép építése és feltöltése
-
+################################################
+# Docker Kép építése és feltöltése
+################################################
+# Szükséges változók:
+# ACR_LOGIN_URL - Az Azure Container Registry bejelentkezési URL-je (pl. myregistry.azurecr.io)
+# ACR_USERNAME - Az Azure Container Registry felhasználóneve
+# Szükséges titkok:
+# ACR_PASSWORD - Az Azure Container Registry jelszava (titokként tárolva) 
+################################################
+name: Docker Kép építése és feltöltése ACR-be
 on:
   push:
     branches:
