@@ -15,7 +15,7 @@ on:
       - demo
 
 env:
-  ACR_IMAGE_NAME: tanulo-xxxxxxxxx
+  ACR_IMAGE_NAME: tanulo-vvklfy
 
 jobs:
   docker:
