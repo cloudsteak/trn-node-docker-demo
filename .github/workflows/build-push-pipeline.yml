@@ -4,7 +4,7 @@
 # Szükséges változók:
 # ACR_LOGIN_URL - Az Azure Container Registry bejelentkezési URL-je (pl. myregistry.azurecr.io)
 # ACR_USERNAME - Az Azure Container Registry felhasználóneve
-# Szükséges titkok:
+# Szükséges secret-ek:
 # ACR_PASSWORD - Az Azure Container Registry jelszava (titokként tárolva) 
 ################################################
 name: Docker Kép építése és feltöltése ACR-be
@@ -13,6 +13,9 @@ on:
     branches:
       - main
       - demo
+
+env:
+  ACR_IMAGE_NAME: tanulo-xxxxxxxxx
 
 jobs:
   docker:
@@ -44,5 +47,5 @@ jobs:
           context: .
           push: true
           tags: |
-            ${{ vars.ACR_LOGIN_URL }}/tanulo-42343:latest
-            ${{ vars.ACR_LOGIN_URL }}/tanulo-42343:${{ steps.short-sha.outputs.sha }}
+            ${{ vars.ACR_LOGIN_URL }}/${{ env.ACR_IMAGE_NAME }}:latest
+            ${{ vars.ACR_LOGIN_URL }}/${{ env.ACR_IMAGE_NAME }}:${{ steps.short-sha.outputs.sha }}
