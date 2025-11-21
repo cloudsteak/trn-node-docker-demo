@@ -7,6 +7,7 @@
 # Szükséges secret-ek:
 # ACR_PASSWORD - Az Azure Container Registry jelszava (titokként tárolva) 
 ################################################
+
 name: Docker Kép építése és feltöltése ACR-be
 on:
   push:
