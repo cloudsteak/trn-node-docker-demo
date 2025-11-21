@@ -21,7 +21,7 @@ app.use(express.static(path.join(path.dirname(new URL(import.meta.url).pathname)
 /* Kezdőlap */
 app.get('/', (req, res) => {
   const NodeVersion = process.versions;
-  res.render('index', { data: { nodeVersion: NodeVersion.node, title: '---- Azure Webalkalmazás példa ----', host: hostname } });
+  res.render('index', { data: { nodeVersion: NodeVersion.node, title: '---- Docker alkalmazás példa ----', host: hostname } });
 });
 
 // catch 404 and forward to error handler
