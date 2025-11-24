@@ -16,7 +16,7 @@
     "ejs": "~3.1.10",
     "express": "~4.21.2",
     "http-errors": "~2.0.0",
-    "morgan": "~1.10.0"
+    "morgan": "~1.10.1"
   },
   "devDependencies": {
     "chai": "^5.2.0",
