@@ -19,7 +19,7 @@
     "morgan": "~1.10.1"
   },
   "devDependencies": {
-    "chai": "^5.2.0",
+    "chai": "^6.2.1",
     "ejs-lint": "^2.0.0",
     "eslint": "^9.38.0",
     "eslint-plugin-ejs": "^0.0.2",
