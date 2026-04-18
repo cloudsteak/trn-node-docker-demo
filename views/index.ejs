@@ -1,17 +1,55 @@
 <!DOCTYPE html>
-<html>
+<html lang="hu">
   <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title><%= data.title %></title>
     <link rel="stylesheet" href="/stylesheets/style.css" />
   </head>
   <body>
     <div id="bodyDiv">
-      <h1>Üdvözöllek Felhő világában!</h1>
-      <h2><%= data.title %></h2>
-      <div style="text-align: center">- Docker kiadás -</div>
-      <p>NodeJS Verzió: <%= data.nodeVersion %></p>
-      <p>Kiszolgáló neve: <%= data.host %></p>
-      
+      <div class="card">
+        <h1>Üdvözöllek a felhő világában!</h1>
+        <h2><%= data.title %></h2>
+      </div>
+
+      <div class="info-grid">
+        <div class="info-item">
+          <div class="label">NodeJS Verzió</div>
+          <div class="value"><%= data.nodeVersion %></div>
+        </div>
+        <div class="info-item">
+          <div class="label">Szerver neve</div>
+          <div class="value"><%= data.host %></div>
+        </div>
+      </div>
+
+      <div class="card">
+        <p class="form-hint">Írj be egy üzenetet (min. 3 karakter, csak betűk, számok, szóköz)</p>
+        <form method="POST" class="form">
+          <input
+            type="text"
+            name="uzenet"
+            class="input"
+            placeholder="Üzenet..."
+            autocomplete="off"
+          />
+          <div class="btn-group">
+            <button type="submit" formaction="/save" class="btn btn-primary">Mentés</button>
+          </div>
+        </form>
+      </div>
+
+      <% if (uzenetLista.length > 0) { %>
+      <div class="card">
+        <h3 class="list-title">Mentett üzenetek</h3>
+        <ul class="uzenet-lista">
+          <% uzenetLista.forEach(function(u) { %>
+            <li><%= u %></li>
+          <% }); %>
+        </ul>
+      </div>
+      <% } %>
     </div>
   </body>
 </html>
