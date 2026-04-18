@@ -19,7 +19,7 @@ env:
 
 jobs:
   docker:
-    name: Build and Push Docker Image to ACR
+    name: Docker Kép építése és feltöltése az ACR-be
     runs-on: ubuntu-latest
     steps:
       -
@@ -29,19 +29,19 @@ jobs:
         id: short-sha
         with:
           length: 8
-      - name: Login to Docker Hub
+      - name: Bejelentkezés az ACR-be
         uses: docker/login-action@v3
         with:
           username: ${{ vars.ACR_USERNAME }}
           password: ${{ secrets.ACR_PASSWORD }}
           registry: ${{ vars.ACR_LOGIN_URL }}
-      - name: Set up QEMU
+      - name: QEMU Beállítása több platform támogatásához
         uses: docker/setup-qemu-action@v3
       -
-        name: Set up Docker Buildx
+        name: Docker Buildx Beállítása
         uses: docker/setup-buildx-action@v3
 
-      - name: Build and push
+      - name: Docker Kép építése és feltöltése
         uses: docker/build-push-action@v6
         with:
           context: .
