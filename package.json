@@ -1,27 +1,31 @@
 {
   "name": "node-demo",
-  "version": "2.1.0",
+  "version": "2.1.1",
   "type": "module",
   "private": true,
   "scripts": {
     "lint:js": "npx eslint .",
-    "lint:ejs": "npx ejslint **/*.ejs",
+    "lint:ejs": "npx ejslint \"**/*.ejs\"",
     "lint:html": "npx htmlhint views/**/*.ejs",
-    "test": "npx mocha test",
-    "start": "node ./bin/www"
+    "test": "npx mocha test/*.mjs",
+    "start": "node ./bin/www",
+    "build": "echo \"No build step defined\""
   },
   "dependencies": {
     "cookie-parser": "~1.4.7",
-    "debug": "~4.4.0",
-    "ejs": "~5.0.1",
+    "debug": "~4.4.3",
+    "ejs": "~5.0.2",
     "express": "~5.2.1",
     "http-errors": "~2.0.0",
     "morgan": "~1.10.1"
   },
+  "overrides": {
+    "serialize-javascript": "^7.0.5"
+  },
   "devDependencies": {
     "chai": "^6.2.2",
     "ejs-lint": "^2.0.0",
-    "eslint": "^10.0.3",
+    "eslint": "^10.2.0",
     "eslint-plugin-ejs": "^0.0.2",
     "eslint-plugin-ejs-js": "^0.1.0",
     "eslint-plugin-html": "^8.1.4",
@@ -29,8 +33,5 @@
     "htmlhint": "^1.9.2",
     "mocha": "^11.7.5",
     "supertest": "^7.2.2"
-  },
-  "overrides": {
-    "serialize-javascript": "7.0.3"
   }
 }
