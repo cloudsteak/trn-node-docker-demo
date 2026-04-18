@@ -128,6 +128,10 @@ dist
 .yarn/build-state.yml
 .yarn/install-state.gz
 .pnp.*
+
+
+**/demo_*.yml
+
 .DS_Store
 commands.md
 .vscode/settings.json

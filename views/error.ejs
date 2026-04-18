@@ -1,3 +1,19 @@
-<h1><%= message %></h1>
-<h2><%= error.status %></h2>
-<pre><%= error.stack %></pre>
+<!DOCTYPE html>
+<html lang="hu">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Hiba</title>
+    <link rel="stylesheet" href="/stylesheets/style.css" />
+  </head>
+  <body>
+    <div id="bodyDiv">
+      <div class="card error-card">
+        <div class="error-code"><%= error.status || 500 %></div>
+        <h1 class="error-title">Hiba történt</h1>
+        <p class="error-message"><%= message %></p>
+        <a href="/" class="btn btn-primary" style="display:inline-block; margin-top:1.5rem; text-decoration:none;">Vissza a főoldalra</a>
+      </div>
+    </div>
+  </body>
+</html>

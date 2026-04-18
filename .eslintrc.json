@@ -9,16 +9,17 @@
         "node"
     ],
     "parserOptions": {
-        "ecmaVersion": "latest"
+        "ecmaVersion": "latest",
+        "sourceType": "module"
     },
     "rules": {
         "node/exports-style": [
             "error",
             "module.exports"
         ],
-        "node/no-unsupported-features/es-builtins": "error",
-        "node/no-unsupported-features/es-syntax": "error",
-        "node/no-unsupported-features/node-builtins": "error",
+        "node/no-unsupported-features/es-builtins": "off",
+        "node/no-unsupported-features/es-syntax": "off",
+        "node/no-unsupported-features/node-builtins": "off",
         "indent": [
             "error",
             2
