@@ -31,7 +31,7 @@
     "eslint-plugin-html": "^8.1.4",
     "eslint-plugin-node": "^11.1.0",
     "htmlhint": "^1.9.2",
-    "mocha": "^11.3.0",
+    "mocha": "^11.7.5",
     "supertest": "^7.2.2"
   }
 }
