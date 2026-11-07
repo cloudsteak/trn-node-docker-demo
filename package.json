@@ -23,7 +23,7 @@
     "serialize-javascript": "^7.0.5"
   },
   "devDependencies": {
-    "chai": "^6.2.2",
+    "chai": "^6.3.0",
     "ejs-lint": "^2.0.0",
     "eslint": "^10.10.0",
     "eslint-plugin-ejs": "^0.0.2",
