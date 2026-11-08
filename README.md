@@ -2,14 +2,40 @@
 
 ## Támogatott NodeJS verziók
 
-- Node 20 LTS
-- Node 22 LTS
-- Node 24 LTS
+- Node.js 24.22.1 vagy újabb
+
+2026. október 21-én a Node.js projekt biztonsági kiadást adott ki. A legsúlyosabb hiba a beépített Brotli-dekóderben van ([CVE-2026-111497](https://nodejs.org/en/blog/vulnerability/october-2026-security-releases)): ha az alkalmazás a `node:zlib` modullal támadó által készített Brotli-adatot bont ki, a dekóder a belső pufferen túlírhat. Ez a folyamat összeomlásához, memóriatartalom kiszivárgásához vagy távoli kódvégrehajtáshoz vezethet. Ugyanez a kiadás további magas súlyosságú hibákat is javított, köztük a TLS-tanúsítvány hosztnév-ellenőrzésének megkerülését és a `dns.resolve()` NUL-bájtos névcsonkolását.
+
+A 24-es LTS ágon ezek a javítások a **24.22.1**-es verzióban jelentek meg. Az ennél régebbi 24.x kiadások érintettek. A Node.js 20 már nem támogatott vonal, arra nem készült javítás. A 22-es ág javított kiadása a 22.23.4, a 26-osé a 26.12.1; ez a projekt a 24-es LTS vonalat követi, ezért a minimum a 24.22.1, és csak ennél újabb Node.js futtatható.
+
+A Docker image a `node:24.22.2-slim` alapról épül. Ez a 24-es LTS aktuális kiadása, és tartalmazza a 24.22.1-ben javított hibákat.
+
+Részletek: [Node.js security releases, 2026. október 21.](https://nodejs.org/en/blog/vulnerability/october-2026-security-releases)
 
 ## Kapcsolódó projekt
 
 Nem Docker verzió: https://github.com/cloudsteak/trn-node-demo
 
+## Helyi futtatás
+
+Node.js 24.22.1 vagy újabb kell. Ellenőrizd a verziót:
+
+```bash
+node -v
+```
+
+A projekt mappájában telepítsd a függőségeket, majd indítsd az alkalmazást:
+
+```bash
+npm install
+npm start
+```
+
+A szerver a [http://localhost:3000](http://localhost:3000) címen érhető el. Más portot a `PORT` környezeti változóval adhatsz meg:
+
+```bash
+PORT=8080 npm start
+```
 
 ## Docker alapok
 
