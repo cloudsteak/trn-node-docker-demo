@@ -48,9 +48,9 @@ stages:
         displayName: Kód ellenőrzés
         steps:
           - task: NodeTool@0
-            displayName: "NodeJs 22 telepítés"
+            displayName: "Node.js 24.22.1 vagy újabb telepítés"
             inputs:
-              versionSpec: "22.x"
+              versionSpec: ">=24.22.1"
           - task: Bash@3
             name: install_dependencies
             displayName: Függőségek teleptése
@@ -92,9 +92,9 @@ stages:
         displayName: Funkció ellenőrzés
         steps:
           - task: NodeTool@0
-            displayName: "NodeJs 22 telepítés"
+            displayName: "Node.js 24.22.1 vagy újabb telepítés"
             inputs:
-              versionSpec: "22.x"
+              versionSpec: ">=24.22.1"
           - task: Bash@3
             name: install_dependencies
             displayName: Függőségek teleptése
