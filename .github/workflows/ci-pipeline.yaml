@@ -4,8 +4,8 @@ name: CI (continuous integration)
 
 # Mikor fut?
 on:
-  # Összefűzési kérés indítása az alábbi branch-ekre
-  pull_request_target:
+  # Összefűzési kérés az alábbi branch-ekre, a PR kódjával, titkok nélkül
+  pull_request:
     types:
       [
         opened,
@@ -20,6 +20,9 @@ on:
       - main
       - demo
 
+permissions:
+  contents: read
+
 # Feladatok
 jobs:
   ci-test:
@@ -28,9 +31,6 @@ jobs:
     steps:
       - name: Kód letöltés
         uses: actions/checkout@v7
-        with:
-          ref: ${{ github.event.pull_request.head.ref }}
-          repository: ${{ github.event.pull_request.head.repo.full_name }}
       - name: Node.js beállítás
         uses: actions/setup-node@v7
         with:
