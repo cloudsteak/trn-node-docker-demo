@@ -95,6 +95,57 @@ eslint ./app.js
 16. Várd meg míg a pipeline létrejön. Ezzel a kapcsolt kész.
 17. Ha GitHub-on módosítasz a kódon, akkor a pipeline elindul és a benne lévő kód lefut.
 
+## GitHub Actions: kép feltöltése ACR-be
+
+A [`.github/workflows/build-push-pipeline.yml`](.github/workflows/build-push-pipeline.yml) a `main` és a `demo` ágra pusholáskor építi a Docker képet, és feltölti az Azure Container Registry-be. A workflow nem környezet (Environment) szintű értéket olvas, ezért a titkot és a változókat a **repó** szintjén kell felvenni.
+
+Előtte az ACR-ben legyen bekapcsolva az admin felhasználó (`az acr update -n <acr-neve> --admin-enabled true`). Enélkül nincs felhasználónév és jelszó, amivel a pipeline be tud jelentkezni.
+
+### Hol hozod létre
+
+A repóban: **Settings → Secrets and variables → Actions**.
+
+- A jelszó a **Secrets** fülre kerül, **New repository secret**.
+- A másik két érték a **Variables** fülre kerül, **New repository variable**.
+
+### Változók
+
+| Név | Mit adj meg | Példa |
+| --- | --- | --- |
+| `ACR_LOGIN_URL` | Az ACR bejelentkezési címe, séma nélkül | `mentorklub.azurecr.io` |
+| `ACR_USERNAME` | Az ACR admin felhasználóneve | `mentorklub` |
+
+### Secret
+
+| Név | Mit adj meg |
+| --- | --- |
+| `ACR_PASSWORD` | Az ACR admin jelszava. Ne kerüljön változóba, és ne kerüljön a repóba. |
+
+### Értékek kiolvasása Azure-ból
+
+A `<acr-neve>` az ACR erőforrás neve (a login URL eleje, a `.azurecr.io` nélkül).
+
+```bash
+# Bejelentkezési cím, pl. mentorklub.azurecr.io
+az acr show --name <acr-neve> --query loginServer --output tsv
+
+# Admin felhasználónév és jelszó
+az acr credential show --name <acr-neve> --query "{username:username, password:passwords[0].value}" --output json
+```
+
+A `loginServer` értékét másold az `ACR_LOGIN_URL` változóba, a `username` mezőt az `ACR_USERNAME` változóba, a `password` mezőt az `ACR_PASSWORD` secretbe.
+
+### Kép neve a workflow-ban
+
+A kép neve (`ACR_IMAGE_NAME`) a workflow `env` blokkjában van, GitHub-változóként nem kell felvenni. Feltöltés előtt cseréld le a placeholderre a saját image nevedet a [`.github/workflows/build-push-pipeline.yml`](.github/workflows/build-push-pipeline.yml) fájlban:
+
+```yaml
+env:
+  ACR_IMAGE_NAME: tanulo-xxxxxxxxx
+```
+
+A pipeline ezután két taggel tolja fel a képet: `latest`, és a commit rövid SHA-ja. A teljes cím: `<ACR_LOGIN_URL>/<ACR_IMAGE_NAME>:<tag>`.
+
 ## NodeJs alkalmazás Docker-izálása
 
 Dockerfile: leírja az alkalmazás környezet kialakításának feltételeit és lépéseit.
